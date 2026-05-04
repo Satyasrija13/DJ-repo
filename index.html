@@ -1,0 +1,157 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Bus Ticket Booking</title>
+
+<style>
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: #f4f6f9;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+/* Container */
+.container {
+  background: #fff;
+  padding: 25px 35px;
+  border-radius: 12px;
+  width: 350px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Form */
+.form-group {
+  margin-bottom: 15px;
+}
+
+label {
+  font-size: 14px;
+  display: block;
+  margin-bottom: 5px;
+}
+
+input, select {
+  width: 100%;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  outline: none;
+  transition: 0.3s;
+}
+
+input:focus, select:focus {
+  border-color: #007bff;
+}
+
+/* Button */
+button {
+  width: 100%;
+  padding: 12px;
+  background: #007bff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+button:hover {
+  background: #0056b3;
+}
+
+/* Summary */
+#summary {
+  margin-top: 20px;
+  padding: 15px;
+  background: #eaf4ff;
+  border-radius: 8px;
+}
+
+.hidden {
+  display: none;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+  <h1>🚌 Bus Ticket Booking</h1>
+
+  <form id="bookingForm">
+    <div class="form-group">
+      <label>From</label>
+      <input type="text" id="from" placeholder="Enter source" required>
+    </div>
+
+    <div class="form-group">
+      <label>To</label>
+      <input type="text" id="to" placeholder="Enter destination" required>
+    </div>
+
+    <div class="form-group">
+      <label>Date</label>
+      <input type="date" id="date" required>
+    </div>
+
+    <div class="form-group">
+      <label>Passengers</label>
+      <input type="number" id="passengers" min="1" max="6" value="1" required>
+    </div>
+
+    <div class="form-group">
+      <label>Select Seat</label>
+      <select id="seat">
+        <option value="Sleeper">Sleeper - ₹800</option>
+        <option value="Seater">Seater - ₹500</option>
+      </select>
+    </div>
+
+    <button type="submit">Book Now</button>
+  </form>
+
+  <div id="summary" class="hidden"></div>
+</div>
+
+<script>
+document.getElementById("bookingForm").addEventListener("submit", function(e) {
+  e.preventDefault();
+
+  const from = document.getElementById("from").value;
+  const to = document.getElementById("to").value;
+  const date = document.getElementById("date").value;
+  const passengers = document.getElementById("passengers").value;
+  const seat = document.getElementById("seat").value;
+
+  let pricePerSeat = seat === "Sleeper" ? 800 : 500;
+  let total = pricePerSeat * passengers;
+
+  const summaryDiv = document.getElementById("summary");
+  summaryDiv.classList.remove("hidden");
+
+  summaryDiv.innerHTML = `
+    <h3>🎟 Booking Confirmed!</h3>
+    <p><strong>From:</strong> ${from}</p>
+    <p><strong>To:</strong> ${to}</p>
+    <p><strong>Date:</strong> ${date}</p>
+    <p><strong>Passengers:</strong> ${passengers}</p>
+    <p><strong>Seat Type:</strong> ${seat}</p>
+    <p><strong>Total Price:</strong> ₹${total}</p>
+  `;
+});
+</script>
+
+</body>
+</html>
+```
